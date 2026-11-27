@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 深色作战舱基调 */
+    --background: 216 14% 5%;
+    --foreground: 210 12% 92%;
+    --card: 216 14% 7%;
+    --card-foreground: 210 12% 92%;
+    --popover: 216 14% 8%;
+    --popover-foreground: 210 12% 92%;
+    /* 深林绿交互主色 */
+    --primary: 158 60% 27%;
+    --primary-foreground: 152 60% 96%;
+    --secondary: 214 12% 12%;
+    --secondary-foreground: 210 12% 88%;
+    --muted: 214 11% 11%;
+    --muted-foreground: 214 7% 56%;
+    --accent: 160 45% 16%;
+    --accent-foreground: 152 60% 90%;
+    --destructive: 4 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 213 12% 15%;
+    --input: 213 12% 17%;
+    --ring: 158 60% 40%;
+    --radius: 0.375rem;
+    --sidebar-background: 216 16% 6%;
+    --sidebar-foreground: 214 8% 62%;
+    --sidebar-primary: 152 60% 55%;
+    --sidebar-primary-foreground: 152 60% 96%;
+    --sidebar-accent: 160 40% 13%;
+    --sidebar-accent-foreground: 152 60% 90%;
+    --sidebar-border: 213 12% 13%;
+    --sidebar-ring: 158 60% 40%;
+
+    /* 语义状态色（与主色同族） */
+    --ok: 158 64% 52%;
+    --warn: 38 92% 55%;
+    --critical: 4 78% 62%;
+    --info: 199 89% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    font-feature-settings: "tnum";
+  }
+  ::selection {
+    background: hsl(158 60% 30%);
+    color: hsl(152 60% 96%);
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(213 12% 18%);
+    border-radius: 3px;
+  }
+}
+
+@layer utilities {
+  /* 数据等宽字体 */
+  .font-data {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+      monospace;
+    font-feature-settings: "tnum" 1;
+  }
+  /* 宽字距大写标签 */
+  .label-caps {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+  }
+  /* LED 状态点 */
+  .led {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+  }
+  .led-ok {
+    background: hsl(var(--ok));
+    box-shadow: 0 0 6px hsl(var(--ok) / 0.7);
+  }
+  .led-warn {
+    background: hsl(var(--warn));
+    box-shadow: 0 0 6px hsl(var(--warn) / 0.7);
+  }
+  .led-critical {
+    background: hsl(var(--critical));
+    box-shadow: 0 0 6px hsl(var(--critical) / 0.7);
+  }
+  .led-idle {
+    background: hsl(214 7% 40%);
+  }
+  .led-pulse {
+    animation: led-pulse 1.6s ease-in-out infinite;
+  }
+  /* 细线分隔面板 */
+  .panel {
+    @apply border border-border bg-card;
+  }
+  .hairline-b {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@keyframes led-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
